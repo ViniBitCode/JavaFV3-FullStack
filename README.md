@@ -1,6 +1,6 @@
-Java APP N3! - Conjunto de proyectos FullStack!
-👾 | Amigos de github, seguimos luego de un año arduo con la facultad y mi primer laburo
-👾 | Finalmente he logrado hacer la aplicación más sencilla posible haciendo uso de una base de datos. El proyecto consta de ser 4 mini proyectos, siendo un Login, Gestor de mascotas, Gestor de auots, y Sistema de roles.
+Java APP N3! - Conjunto de proyectos FullStack!  
+👾 | Amigos de github, seguimos luego de un año arduo con la facultad y mi primer laburo.  
+👾 | Finalmente he logrado hacer la aplicación más sencilla posible haciendo uso de una base de datos. El proyecto consta de ser 4 mini proyectos, siendo un Login, Gestor de mascotas, Gestor de auots, y Sistema de roles.  
 
 ### **Algunas otras cosas que me faltaron poner en los juegos:**
 - Cuando termine el proyecto actualizo! jeje
