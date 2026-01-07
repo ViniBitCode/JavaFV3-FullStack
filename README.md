@@ -10,6 +10,6 @@ Java APP N3! - Conjunto de proyectos FullStack!
 - Uso de JPA como intermedio entre una bbdd hecha con phpmyadmin (haciendo uso de Xampp) y los programas.
 - Implementacion de Query personalizada para buscar Mascotas por nombre
 
-Siguiente proyecto:
-💻 | El siguiente paso sera un proyecto con SpringBoot!
-💻 | Cuando termine este proyecto, actualizo! jeje!
+Siguiente proyecto:  
+💻 | El siguiente paso sera un proyecto con SpringBoot!  
+💻 | Cuando termine este proyecto, actualizo! jeje!  
