@@ -1,19 +1,14 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- */
-
 package com.mycompany.ejercicio1.bbdd;
 
-import Interfaces.PrimerPantalla;
+import Interfaces.InicioSesion.Login;
 
 public class App {
 
-    public static void main(String[] args) { 
-        
-        PrimerPantalla pp = new PrimerPantalla();
+    public static void main(String[] args) {
+
+        Login pp = new Login();
         pp.setVisible(true);
         pp.setLocationRelativeTo(null);
-               
-        
+
     }
 }

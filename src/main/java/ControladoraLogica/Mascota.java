@@ -1,4 +1,4 @@
-package Logica;
+package ControladoraLogica;
 
 import jakarta.persistence.Basic;
 import jakarta.persistence.Entity;

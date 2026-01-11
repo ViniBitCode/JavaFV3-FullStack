@@ -2,10 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package Interfaces;
+package Interfaces.Animales;
 
-import Logica.ControladoraLogica;
-import Logica.Mascota;
+import ControladoraLogica.ControladoraLogica;
+import ControladoraLogica.Mascota;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -232,7 +232,7 @@ public class VerAnimalesPantalla extends javax.swing.JFrame {
            volver_pantalla = false;
        } else {
             this.dispose();
-            PrimerPantalla pp = new PrimerPantalla();
+            PrimerPantallaAnimales pp = new PrimerPantallaAnimales();
             pp.setVisible(true);
             pp.setLocationRelativeTo(null); 
        }

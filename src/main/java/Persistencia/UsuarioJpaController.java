@@ -4,7 +4,7 @@
  */
 package Persistencia;
 
-import ControladoraLogica.Mascota;
+import ControladoraLogica.Usuario;
 import Persistencia.exceptions.NonexistentEntityException;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
@@ -12,18 +12,17 @@ import java.io.Serializable;
 import jakarta.persistence.Query;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.persistence.Persistence;
-import jakarta.persistence.TypedQuery;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Root;
 import java.util.List;
 
-public class MascotaJpaController implements Serializable {
+public class UsuarioJpaController implements Serializable {
 
-    public MascotaJpaController(EntityManagerFactory emf) {
+    public UsuarioJpaController(EntityManagerFactory emf) {
         this.emf = emf;
     }
     
-    public MascotaJpaController() {
+     public UsuarioJpaController() {
         emf = Persistence.createEntityManagerFactory("perreria_PU");
     }
     
@@ -33,12 +32,12 @@ public class MascotaJpaController implements Serializable {
         return emf.createEntityManager();
     }
 
-    public void create(Mascota mascota) {
+    public void create(Usuario usuario) {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            em.persist(mascota);
+            em.persist(usuario);
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -47,19 +46,19 @@ public class MascotaJpaController implements Serializable {
         }
     }
 
-    public void edit(Mascota mascota) throws NonexistentEntityException, Exception {
+    public void edit(Usuario usuario) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            mascota = em.merge(mascota);
+            usuario = em.merge(usuario);
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
-                int id = mascota.getId();
-                if (findMascota(id) == null) {
-                    throw new NonexistentEntityException("The mascota with id " + id + " no longer exists.");
+                int id = usuario.getId();
+                if (findUsuario(id) == null) {
+                    throw new NonexistentEntityException("The usuario with id " + id + " no longer exists.");
                 }
             }
             throw ex;
@@ -75,14 +74,14 @@ public class MascotaJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Mascota mascota;
+            Usuario usuario;
             try {
-                mascota = em.getReference(Mascota.class, id);
-                mascota.getId();
+                usuario = em.getReference(Usuario.class, id);
+                usuario.getId();
             } catch (EntityNotFoundException enfe) {
-                throw new NonexistentEntityException("The mascota with id " + id + " no longer exists.", enfe);
+                throw new NonexistentEntityException("The usuario with id " + id + " no longer exists.", enfe);
             }
-            em.remove(mascota);
+            em.remove(usuario);
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -91,19 +90,19 @@ public class MascotaJpaController implements Serializable {
         }
     }
 
-    public List<Mascota> findMascotaEntities() {
-        return findMascotaEntities(true, -1, -1);
+    public List<Usuario> findUsuarioEntities() {
+        return findUsuarioEntities(true, -1, -1);
     }
 
-    public List<Mascota> findMascotaEntities(int maxResults, int firstResult) {
-        return findMascotaEntities(false, maxResults, firstResult);
+    public List<Usuario> findUsuarioEntities(int maxResults, int firstResult) {
+        return findUsuarioEntities(false, maxResults, firstResult);
     }
 
-    private List<Mascota> findMascotaEntities(boolean all, int maxResults, int firstResult) {
+    private List<Usuario> findUsuarioEntities(boolean all, int maxResults, int firstResult) {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            cq.select(cq.from(Mascota.class));
+            cq.select(cq.from(Usuario.class));
             Query q = em.createQuery(cq);
             if (!all) {
                 q.setMaxResults(maxResults);
@@ -115,20 +114,20 @@ public class MascotaJpaController implements Serializable {
         }
     }
 
-    public Mascota findMascota(int id) {
+    public Usuario findUsuario(int id) {
         EntityManager em = getEntityManager();
         try {
-            return em.find(Mascota.class, id);
+            return em.find(Usuario.class, id);
         } finally {
             em.close();
         }
     }
 
-    public int getMascotaCount() {
+    public int getUsuarioCount() {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            Root<Mascota> rt = cq.from(Mascota.class);
+            Root<Usuario> rt = cq.from(Usuario.class);
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
             return ((Long) q.getSingleResult()).intValue();
@@ -137,14 +136,4 @@ public class MascotaJpaController implements Serializable {
         }
     }
     
-    public List<Mascota> findByNombre(String nombre){
-        EntityManager em = getEntityManager();
-        try {
-            TypedQuery<Mascota> query = em.createQuery("SELECT m FROM Mascota m WHERE m.nombre_mascota LIKE :nombre", Mascota.class);
-            query.setParameter("nombre", "%" + nombre + "%");
-            return query.getResultList();
-        } finally {
-            em.close();
-        }
-    }
 }

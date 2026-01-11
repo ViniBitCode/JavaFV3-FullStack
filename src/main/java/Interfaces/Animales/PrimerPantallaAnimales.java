@@ -2,20 +2,25 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package Interfaces;
+package Interfaces.Animales;
+
+import Interfaces.Animales.AgregarAnimalPantalla;
+import Interfaces.Animales.VerAnimalesPantalla;
+import Interfaces.Animales.VerAnimalesPantalla;
+import Interfaces.InicioSesion.PantallaPostLogin;
 
 /**
  *
  * @author facun
  */
-public class PrimerPantalla extends javax.swing.JFrame {
+public class PrimerPantallaAnimales extends javax.swing.JFrame {
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(PrimerPantalla.class.getName());
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(PrimerPantallaAnimales.class.getName());
 
     /**
      * Creates new form PrimerPantalla
      */
-    public PrimerPantalla() {
+    public PrimerPantallaAnimales() {
         initComponents();
     }
 
@@ -31,6 +36,7 @@ public class PrimerPantalla extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         btn_ver_animales = new javax.swing.JButton();
         btn_agregar_animales = new javax.swing.JButton();
+        btn_agregar_animales1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -44,6 +50,12 @@ public class PrimerPantalla extends javax.swing.JFrame {
         btn_agregar_animales.setFocusable(false);
         btn_agregar_animales.addActionListener(this::btn_agregar_animalesActionPerformed);
 
+        btn_agregar_animales1.setBackground(new java.awt.Color(153, 255, 255));
+        btn_agregar_animales1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        btn_agregar_animales1.setText("Volver al inicio");
+        btn_agregar_animales1.setFocusable(false);
+        btn_agregar_animales1.addActionListener(this::btn_agregar_animales1ActionPerformed);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -52,17 +64,20 @@ public class PrimerPantalla extends javax.swing.JFrame {
                 .addGap(55, 55, 55)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btn_ver_animales, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btn_agregar_animales, javax.swing.GroupLayout.DEFAULT_SIZE, 420, Short.MAX_VALUE))
+                    .addComponent(btn_agregar_animales, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btn_agregar_animales1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 420, Short.MAX_VALUE))
                 .addContainerGap(53, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(57, 57, 57)
-                .addComponent(btn_agregar_animales, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32)
-                .addComponent(btn_ver_animales, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(60, Short.MAX_VALUE))
+                .addContainerGap(19, Short.MAX_VALUE)
+                .addComponent(btn_agregar_animales1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btn_agregar_animales, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btn_ver_animales, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -94,8 +109,16 @@ public class PrimerPantalla extends javax.swing.JFrame {
         pp.setLocationRelativeTo(null);
     }//GEN-LAST:event_btn_ver_animalesActionPerformed
 
+    private void btn_agregar_animales1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_agregar_animales1ActionPerformed
+        this.dispose();
+        PantallaPostLogin pp = new PantallaPostLogin();
+        pp.setVisible(rootPaneCheckingEnabled);
+        pp.setLocationRelativeTo(null);
+    }//GEN-LAST:event_btn_agregar_animales1ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_agregar_animales;
+    private javax.swing.JButton btn_agregar_animales1;
     private javax.swing.JButton btn_ver_animales;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables

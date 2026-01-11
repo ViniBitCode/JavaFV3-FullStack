@@ -4,27 +4,29 @@
  */
 package Persistencia;
 
-import Logica.Mascota;
+import ControladoraLogica.Mascota;
+import ControladoraLogica.Usuario;
 import Persistencia.exceptions.NonexistentEntityException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ControladoraPersistencia {
-    
+
     MascotaJpaController mascotaJpa = new MascotaJpaController();
-    
+    UsuarioJpaController usuarioJpa = new UsuarioJpaController();
+
     public void crearMascota(Mascota mascota) {
-        
+
         mascotaJpa.create(mascota);
-        
+
     }
 
     public ArrayList<Mascota> traerListaMascota() {
-        
+
         List<Mascota> lista_aux = mascotaJpa.findMascotaEntities();
-        ArrayList<Mascota> lista_mascotas = new ArrayList<Mascota> (lista_aux);
+        ArrayList<Mascota> lista_mascotas = new ArrayList<Mascota>(lista_aux);
         return lista_mascotas;
-        
+
     }
 
     public void eliminarMascota(int id) {
@@ -36,13 +38,25 @@ public class ControladoraPersistencia {
     }
 
     public Mascota buscarMascota(int id) {
-        
+
         return mascotaJpa.findMascota(id);
-         
+
     }
-    
-    public List<Mascota> buscar_por_nombre(String nombre){
+
+    public List<Mascota> buscar_por_nombre(String nombre) {
         return mascotaJpa.findByNombre(nombre);
     }
-    
+
+    public List<Usuario> traer_lista_usuarios() {
+
+        return usuarioJpa.findUsuarioEntities();
+
+    }
+
+    public void agregar_usuario(Usuario usuario) {
+
+        usuarioJpa.create(usuario);
+
+    }
+
 }
