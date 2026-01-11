@@ -5,7 +5,9 @@
 package Interfaces.InicioSesion;
 
 import ControladoraLogica.ControladoraLogica;
+import ControladoraLogica.Mascota;
 import ControladoraLogica.Usuario;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 
@@ -163,7 +165,7 @@ public class Login extends javax.swing.JFrame {
         if (user_buscar != null) {
             if (new String(psw_contraseña.getPassword()).equals(user_buscar.getContrasenia_usuario())) {
                 this.dispose();
-                PantallaPostLogin pp = new PantallaPostLogin();
+                PantallaPostLogin pp = new PantallaPostLogin(user_buscar);
                 pp.setVisible(true);
                 pp.setLocationRelativeTo(null);
             } else {
@@ -230,7 +232,7 @@ public class Login extends javax.swing.JFrame {
         String pass2 = new String(psw_contraseña2.getPassword());
 
         if (pass1.equals(pass2) && !txt_nombre1.getText().equals("")) {
-            control_bbdd.crear_usuario(new Usuario(txt_nombre1.getText(), pass2));
+            control_bbdd.crear_usuario(new Usuario(txt_nombre1.getText(), pass2, new ArrayList<Mascota>()));
             JOptionPane.showMessageDialog(this, "Se agrego el usuario!", "Atencion", JOptionPane.INFORMATION_MESSAGE);
             eliminar_texto_registro();
 

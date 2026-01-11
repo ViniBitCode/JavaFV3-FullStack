@@ -6,19 +6,22 @@ package Interfaces.Animales;
 
 import ControladoraLogica.ControladoraLogica;
 import ControladoraLogica.Mascota;
+import ControladoraLogica.Usuario;
 import java.time.Instant;
 import java.util.Date;
 import javax.swing.JOptionPane;
 
-
 public class AgregarAnimalPantalla extends javax.swing.JFrame {
-    
+
     private ControladoraLogica control_bbdd = new ControladoraLogica();
-    
+    private final Usuario usuario;
+
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(AgregarAnimalPantalla.class.getName());
-   
-    public AgregarAnimalPantalla() {
+
+    public AgregarAnimalPantalla(Usuario usuario) {
+        this.usuario = usuario;
         initComponents();
+
     }
 
     @SuppressWarnings("unchecked")
@@ -38,9 +41,6 @@ public class AgregarAnimalPantalla extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
         panel_telefono = new javax.swing.JTextPane();
-        jScrollPane5 = new javax.swing.JScrollPane();
-        panel_nombre_duenio = new javax.swing.JTextPane();
-        jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jScrollPane6 = new javax.swing.JScrollPane();
         panel_direccion_duenio = new javax.swing.JTextPane();
@@ -66,10 +66,6 @@ public class AgregarAnimalPantalla extends javax.swing.JFrame {
         jLabel4.setText("Telefono contacto");
 
         jScrollPane4.setViewportView(panel_telefono);
-
-        jScrollPane5.setViewportView(panel_nombre_duenio);
-
-        jLabel5.setText("Nombre duenio");
 
         jLabel6.setText("Direccion duenio");
 
@@ -109,20 +105,15 @@ public class AgregarAnimalPantalla extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel4)
                                 .addGap(21, 21, 21)
-                                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
-                                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel6)
                                     .addComponent(jLabel7))
                                 .addGap(21, 21, 21)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
-                                    .addComponent(panel_fecha_registro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
+                                    .addComponent(jScrollPane6)
+                                    .addComponent(panel_fecha_registro, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btn_agregar, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)
@@ -153,10 +144,9 @@ public class AgregarAnimalPantalla extends javax.swing.JFrame {
                     .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(2, 2, 2)
+                        .addComponent(btn_volver, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -164,10 +154,7 @@ public class AgregarAnimalPantalla extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(panel_fecha_registro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(2, 2, 2)
-                        .addComponent(btn_volver, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(panel_fecha_registro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(27, Short.MAX_VALUE))
         );
 
@@ -181,7 +168,7 @@ public class AgregarAnimalPantalla extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
@@ -190,46 +177,45 @@ public class AgregarAnimalPantalla extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_agregarActionPerformed
-        if(chequear_campos_llenos()) {
-            JOptionPane.showMessageDialog(this, "Llena todos los campos","Atencion",JOptionPane.WARNING_MESSAGE);
+        if (chequear_campos_llenos()) {
+            JOptionPane.showMessageDialog(this, "Llena todos los campos", "Atencion", JOptionPane.WARNING_MESSAGE);
         } else {
-            Mascota mascota_nueva = new Mascota(panel_nombre_mascota.getText(), 11, panel_raza.getText(), 11, panel_nombre_duenio.getText(), panel_direccion_duenio.getText(), panel_fecha_registro.getDate());
+            Mascota mascota_nueva = new Mascota(panel_nombre_mascota.getText(), 11, panel_raza.getText(), 11, usuario.getNombre_usuario(), panel_direccion_duenio.getText(), panel_fecha_registro.getDate(), usuario);
             control_bbdd.crearMascota(mascota_nueva);
+            usuario.getLista_mascotas().add(mascota_nueva);
             borrar_datos_en_campos();
         }
     }//GEN-LAST:event_btn_agregarActionPerformed
 
     private void btn_volverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_volverActionPerformed
         this.dispose();
-        PrimerPantallaAnimales pp = new PrimerPantallaAnimales();
+        PrimerPantallaAnimales pp = new PrimerPantallaAnimales(usuario);
         pp.setVisible(true);
         pp.setLocationRelativeTo(null);
     }//GEN-LAST:event_btn_volverActionPerformed
 
-    
     private void borrar_datos_en_campos() {
         panel_direccion_duenio.setText("");
         panel_edad.setText("");
         panel_fecha_registro.setDateFormatString("");
-        panel_nombre_duenio.setText("");
         panel_nombre_mascota.setText("");
         panel_raza.setText("");
-        panel_telefono.setText(""); 
-        
+        panel_telefono.setText("");
+
     }
-    
+
     private boolean chequear_campos_llenos() {
-        if(panel_direccion_duenio.getText().equals("") || panel_edad.getText().equals("") || 
-           panel_nombre_duenio.getText().equals("") || panel_fecha_registro.getDate().equals("") ||
-           panel_nombre_mascota.getText().equals("") || panel_raza.getText().equals("") || 
-           panel_telefono.getText().equals("")) {
-           return true;
+        if (panel_direccion_duenio.getText().equals("") || panel_edad.getText().equals("")
+                || panel_fecha_registro.getDate().equals("")
+                || panel_nombre_mascota.getText().equals("") || panel_raza.getText().equals("")
+                || panel_telefono.getText().equals("")) {
+            return true;
         } else {
-           return false;
+            return false;
         }
     }
-    
-  
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_agregar;
     private javax.swing.JButton btn_volver;
@@ -237,7 +223,6 @@ public class AgregarAnimalPantalla extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
@@ -245,12 +230,10 @@ public class AgregarAnimalPantalla extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JTextPane panel_direccion_duenio;
     private javax.swing.JTextPane panel_edad;
     private com.toedter.calendar.JDateChooser panel_fecha_registro;
-    private javax.swing.JTextPane panel_nombre_duenio;
     private javax.swing.JTextPane panel_nombre_mascota;
     private javax.swing.JTextPane panel_raza;
     private javax.swing.JTextPane panel_telefono;

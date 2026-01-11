@@ -6,6 +6,7 @@ package Interfaces.Animales;
 
 import ControladoraLogica.ControladoraLogica;
 import ControladoraLogica.Mascota;
+import ControladoraLogica.Usuario;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -13,79 +14,83 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 public class VerAnimalesPantalla extends javax.swing.JFrame {
-    
+
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(VerAnimalesPantalla.class.getName());
-    
+
+    private final Usuario usuario;
     private DefaultTableModel tabla_animales;
     private ControladoraLogica control_bbdd = new ControladoraLogica();
     private boolean volver_pantalla = false;
 
-    public VerAnimalesPantalla() {
+    public VerAnimalesPantalla(Usuario usuario) {
+        this.usuario = usuario;
+
         initComponents();
+
         configurarTablaAnimales();
         configurarTextFields();
     }
 
     private void configurarTablaAnimales() {
         tabla_animales = (DefaultTableModel) tbl_animales.getModel();
-        String cabecera[] = {"Id","Nombre mascota", "Edad", "Raza", "Telefono", "Nombre duenio", "Direccion duenio", "Fecha registro"};
+        String cabecera[] = {"Id", "Nombre mascota", "Edad", "Raza", "Telefono", "Nombre duenio", "Direccion duenio", "Fecha registro"};
         tabla_animales.setColumnIdentifiers(cabecera);
-        
-        mostrarTablaAnimales();
-        
-        
-        
-    }   
 
-    private void mostrarTablaAnimales(){
-        tabla_animales.setRowCount(0);
-        ArrayList<Mascota> lista_mascotas = control_bbdd.traerListaMascotas();
-        for (Mascota mascota_en_lista : lista_mascotas) {
-            Object[] mascota = {mascota_en_lista.getId(), 
-                                mascota_en_lista.getNombre_mascota(), 
-                                mascota_en_lista.getEdad(), 
-                                mascota_en_lista.getRaza(), 
-                                mascota_en_lista.getTelefono(), 
-                                mascota_en_lista.getNombre_duenio(), 
-                                mascota_en_lista.getDireccion_duenio(), 
-                                mascota_en_lista.getFecha_registrado()};
-            tabla_animales.addRow(mascota);
-        }
-        tbl_animales.setModel(tabla_animales);
+        mostrarTablaAnimales();
+
     }
-    
-    private void configurarTextFields(){
+
+    private void mostrarTablaAnimales() {
+        tabla_animales.setRowCount(0);
+        ArrayList<Mascota> lista_mascotas = usuario.getLista_mascotas();
+        if (!lista_mascotas.isEmpty()) {
+            for (Mascota mascota_en_lista : lista_mascotas) {
+                Object[] mascota = {mascota_en_lista.getId(),
+                    mascota_en_lista.getNombre_mascota(),
+                    mascota_en_lista.getEdad(),
+                    mascota_en_lista.getRaza(),
+                    mascota_en_lista.getTelefono(),
+                    mascota_en_lista.getNombre_duenio(),
+                    mascota_en_lista.getDireccion_duenio(),
+                    mascota_en_lista.getFecha_registrado()};
+                tabla_animales.addRow(mascota);
+            }
+            tbl_animales.setModel(tabla_animales);
+        } else {
+            tbl_animales.setModel(tabla_animales);
+        }
+
+    }
+
+    private void configurarTextFields() {
         JTextField text_fields[] = new JTextField[2];
         text_fields[0] = jTextField1;
         text_fields[1] = jTextField2;
 
-        String texto_gris[] = {"Buscar por ID","Buscar por nombre de mascota"};
-        
+        String texto_gris[] = {"Buscar por ID", "Buscar por nombre de mascota"};
+
         for (int i = 0; i < text_fields.length; i++) {
             final int index = i;
             JTextField text_field = text_fields[i];
             text_field.addFocusListener(new java.awt.event.FocusAdapter() {
-                
+
                 @Override
-                public void focusGained(java.awt.event.FocusEvent evt){
+                public void focusGained(java.awt.event.FocusEvent evt) {
                     if (text_field.getText().equals(texto_gris[index])) {
                         text_field.setText("");
                         text_field.setForeground(java.awt.Color.BLACK);
                     }
                 }
-                
+
                 @Override
-                public void focusLost(java.awt.event.FocusEvent evt){
-                    
-                        text_field.setForeground(java.awt.Color.GRAY);
-                        text_field.setText(texto_gris[index]);
-                    
+                public void focusLost(java.awt.event.FocusEvent evt) {
+                    text_field.setForeground(java.awt.Color.GRAY);
+                    text_field.setText(texto_gris[index]);
                 }
-                
             });
         }
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -217,39 +222,39 @@ public class VerAnimalesPantalla extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_eliminar_mascotaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_eliminar_mascotaActionPerformed
-        if(tbl_animales.getSelectedRow() != -1) {
+        if (tbl_animales.getSelectedRow() != -1) {
             int id_eliminar = Integer.parseInt(String.valueOf(tbl_animales.getValueAt(tbl_animales.getSelectedRow(), 0)));
             control_bbdd.eliminar_mascota(id_eliminar);
             configurarTablaAnimales();
         } else {
-            JOptionPane.showMessageDialog(this, "Primero selecciona una fila...","Atencion",JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Primero selecciona una fila...", "Atencion", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_btn_eliminar_mascotaActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-       if(volver_pantalla == true) {
-           mostrarTablaAnimales();
-           volver_pantalla = false;
-       } else {
+        if (volver_pantalla == true) {
+            mostrarTablaAnimales();
+            volver_pantalla = false;
+        } else {
             this.dispose();
-            PrimerPantallaAnimales pp = new PrimerPantallaAnimales();
+            PrimerPantallaAnimales pp = new PrimerPantallaAnimales(usuario);
             pp.setVisible(true);
-            pp.setLocationRelativeTo(null); 
-       }
-        
-       
+            pp.setLocationRelativeTo(null);
+        }
+
+
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        
+
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jTextField1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField1FocusGained
-        
+
     }//GEN-LAST:event_jTextField1FocusGained
 
     private void jTextField1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField1FocusLost
-        
+
     }//GEN-LAST:event_jTextField1FocusLost
 
     private void jTextField2FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField2FocusGained
@@ -265,68 +270,68 @@ public class VerAnimalesPantalla extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField2ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        
+
         try {
             int id_buscar = Integer.parseInt(jTextField1.getText());
             Mascota mascota = control_bbdd.buscarMascota(id_buscar);
-            
-            if(mascota == null) {
-                JOptionPane.showMessageDialog(this, "No hay ningun animal con el ID: [" + id_buscar + "]" ,"Atencion",JOptionPane.WARNING_MESSAGE);
+
+            if (mascota == null) {
+                JOptionPane.showMessageDialog(this, "No hay ningun animal con el ID: [" + id_buscar + "]", "Atencion", JOptionPane.WARNING_MESSAGE);
                 jTextField1.setText("");
             } else {
-                Object[] object = { mascota.getId(), 
-                                mascota.getNombre_mascota(), 
-                                mascota.getEdad(), 
-                                mascota.getRaza(), 
-                                mascota.getTelefono(), 
-                                mascota.getNombre_duenio(), 
-                                mascota.getDireccion_duenio(), 
-                                mascota.getFecha_registrado()};
+                Object[] object = {mascota.getId(),
+                    mascota.getNombre_mascota(),
+                    mascota.getEdad(),
+                    mascota.getRaza(),
+                    mascota.getTelefono(),
+                    mascota.getNombre_duenio(),
+                    mascota.getDireccion_duenio(),
+                    mascota.getFecha_registrado()};
                 tabla_animales.setRowCount(0);
                 tabla_animales.addRow(object);
                 tbl_animales.setModel(tabla_animales);
                 volver_pantalla = true;
             }
-        } catch (Exception e){
-            JOptionPane.showMessageDialog(this, "Pone un numero valido...","Atencion",JOptionPane.WARNING_MESSAGE);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Pone un numero valido...", "Atencion", JOptionPane.WARNING_MESSAGE);
             jTextField1.setText("");
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        
+
         try {
             String nombre_a_buscar = jTextField2.getText();
             List<Mascota> lista_nombres = control_bbdd.buscar_por_nombre(nombre_a_buscar);
-            
-            if(lista_nombres.isEmpty()) {
-                JOptionPane.showMessageDialog(this, "No hay ningun animal con el nombre: [" + nombre_a_buscar + "]" ,"Atencion",JOptionPane.WARNING_MESSAGE);
+
+            if (lista_nombres.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "No hay ningun animal con el nombre: [" + nombre_a_buscar + "]", "Atencion", JOptionPane.WARNING_MESSAGE);
                 jTextField1.setText("");
             } else {
                 tabla_animales.setRowCount(0);
                 for (Mascota mascota_en_lista : lista_nombres) {
-                    Object[] mascota = {mascota_en_lista.getId(), 
-                        mascota_en_lista.getNombre_mascota(), 
-                        mascota_en_lista.getEdad(), 
-                        mascota_en_lista.getRaza(), 
-                        mascota_en_lista.getTelefono(), 
-                        mascota_en_lista.getNombre_duenio(), 
-                        mascota_en_lista.getDireccion_duenio(), 
+                    Object[] mascota = {mascota_en_lista.getId(),
+                        mascota_en_lista.getNombre_mascota(),
+                        mascota_en_lista.getEdad(),
+                        mascota_en_lista.getRaza(),
+                        mascota_en_lista.getTelefono(),
+                        mascota_en_lista.getNombre_duenio(),
+                        mascota_en_lista.getDireccion_duenio(),
                         mascota_en_lista.getFecha_registrado()};
                     tabla_animales.addRow(mascota);
                 }
                 tbl_animales.setModel(tabla_animales);
                 volver_pantalla = true;
             }
-        } catch (Exception e){
-            JOptionPane.showMessageDialog(this, "Pone un nombre valido...","Atencion",JOptionPane.WARNING_MESSAGE);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Pone un nombre valido...", "Atencion", JOptionPane.WARNING_MESSAGE);
             jTextField1.setText("");
         }
-        
-        
+
+
     }//GEN-LAST:event_jButton3ActionPerformed
 
-  
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_eliminar_mascota;
     private javax.swing.JButton jButton2;

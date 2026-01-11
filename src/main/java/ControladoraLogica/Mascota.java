@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 import java.io.Serializable;
@@ -12,11 +13,11 @@ import java.util.Date;
 
 @Entity
 public class Mascota implements Serializable {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int id;
-    
+
     @Basic
     private String nombre_mascota;
     private int edad;
@@ -24,14 +25,17 @@ public class Mascota implements Serializable {
     private int telefono;
     private String nombre_duenio;
     private String direccion_duenio;
-    
+
     @Temporal(TemporalType.DATE)
     private Date fecha_registrado;
+
+    @ManyToOne
+    private Usuario usuario;
 
     public Mascota() {
     }
 
-    public Mascota(String nombre_mascota, int edad, String raza, int telefono, String nombre_duenio, String direccion_duenio, Date fecha_registrado) {
+    public Mascota(String nombre_mascota, int edad, String raza, int telefono, String nombre_duenio, String direccion_duenio, Date fecha_registrado, Usuario usuario) {
         this.nombre_mascota = nombre_mascota;
         this.edad = edad;
         this.raza = raza;
@@ -39,9 +43,16 @@ public class Mascota implements Serializable {
         this.nombre_duenio = nombre_duenio;
         this.direccion_duenio = direccion_duenio;
         this.fecha_registrado = fecha_registrado;
+        this.usuario = usuario;
     }
 
-    
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
 
     public int getId() {
         return id;
@@ -106,8 +117,5 @@ public class Mascota implements Serializable {
     public void setFecha_registrado(Date fecha_registrado) {
         this.fecha_registrado = fecha_registrado;
     }
-    
-    
-   
-    
+
 }

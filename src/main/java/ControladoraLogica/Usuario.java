@@ -9,7 +9,10 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Usuario implements Serializable {
@@ -22,12 +25,16 @@ public class Usuario implements Serializable {
     private String nombre_usuario;
     private String contrasenia_usuario;
 
+    @OneToMany(mappedBy = "usuario")
+    private ArrayList<Mascota> lista_mascotas;
+
     public Usuario() {
     }
 
-    public Usuario(String nombre_usuario, String contrasenia_usuario) {
+    public Usuario(String nombre_usuario, String contrasenia_usuario, ArrayList<Mascota> lista_mascotas) {
         this.nombre_usuario = nombre_usuario;
         this.contrasenia_usuario = contrasenia_usuario;
+        this.lista_mascotas = lista_mascotas;
     }
 
     public int getId() {
@@ -52,6 +59,14 @@ public class Usuario implements Serializable {
 
     public void setContrasenia_usuario(String contrasenia_usuario) {
         this.contrasenia_usuario = contrasenia_usuario;
+    }
+
+    public ArrayList<Mascota> getLista_mascotas() {
+        return lista_mascotas;
+    }
+
+    public void setLista_mascotas(ArrayList<Mascota> lista_mascotas) {
+        this.lista_mascotas = lista_mascotas;
     }
 
     @Override
