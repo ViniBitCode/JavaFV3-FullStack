@@ -59,4 +59,35 @@ public class ControladoraPersistencia {
 
     }
 
+    public ArrayList<Usuario> traerListaUsuario() {
+        List<Usuario> lista_aux = usuarioJpa.findUsuarioEntities();
+        ArrayList<Usuario> lista_usuario = new ArrayList<Usuario>(lista_aux);
+        return lista_usuario;
+    }
+
+    public void eliminar_usuario(int id_eliminar) {
+
+        try {
+            usuarioJpa.destroy(id_eliminar);
+        } catch (NonexistentEntityException ex) {
+            System.getLogger(ControladoraPersistencia.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }
+
+    }
+
+    public Usuario buscar_usuario(int id_buscar) {
+
+        return usuarioJpa.findUsuario(id_buscar);
+
+    }
+
+    public void editar_usuario(Usuario usuario) {
+
+        try {
+            usuarioJpa.edit(usuario);
+        } catch (Exception ex) {
+            System.getLogger(ControladoraPersistencia.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }
+
+    }
 }

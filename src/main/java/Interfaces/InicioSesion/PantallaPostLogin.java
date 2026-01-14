@@ -6,6 +6,7 @@ package Interfaces.InicioSesion;
 
 import ControladoraLogica.Usuario;
 import Interfaces.Animales.PrimerPantallaAnimales;
+import Interfaces.Roles.ListaUsuarios;
 
 /**
  *
@@ -19,9 +20,12 @@ public class PantallaPostLogin extends javax.swing.JFrame {
     public PantallaPostLogin(Usuario usuario) {
 
         initComponents();
-
+        
         this.usuario = usuario;
         txt_titulo.setText("Bienvenido [" + usuario.getNombre_usuario() + "]!");
+        if(!usuario.getNombre_usuario().equals("Admin")) {
+            jButton1.setEnabled(false);
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -37,9 +41,9 @@ public class PantallaPostLogin extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jButton1.setText("EJERCICIO AGENDA");
-        jButton1.setEnabled(false);
+        jButton1.setText("EJERCICIO ADMINISTRADOR");
         jButton1.setFocusable(false);
+        jButton1.addActionListener(this::jButton1ActionPerformed);
 
         jButton2.setText("EJERCICIO ANIMALES");
         jButton2.setFocusable(false);
@@ -122,6 +126,13 @@ public class PantallaPostLogin extends javax.swing.JFrame {
         pp.setVisible(true);
         pp.setLocationRelativeTo(null);
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        this.dispose();
+        ListaUsuarios pp = new ListaUsuarios(usuario);
+        pp.setVisible(true);
+        pp.setLocationRelativeTo(null);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

@@ -4,6 +4,7 @@
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>ControladoraLogica.Mascota</class>
     <class>ControladoraLogica.Usuario</class>
+    <class>ControladoraLogica.Permiso</class>
     <properties>
       <property name="jakarta.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/3_ejercicio_perreria?serverTimezone=UTC"/>
       <property name="jakarta.persistence.jdbc.user" value="root"/>

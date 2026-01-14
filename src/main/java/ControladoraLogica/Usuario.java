@@ -10,6 +10,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +25,7 @@ public class Usuario implements Serializable {
     @Basic
     private String nombre_usuario;
     private String contrasenia_usuario;
+    private String permiso;
 
     @OneToMany(mappedBy = "usuario")
     private ArrayList<Mascota> lista_mascotas;
@@ -31,10 +33,11 @@ public class Usuario implements Serializable {
     public Usuario() {
     }
 
-    public Usuario(String nombre_usuario, String contrasenia_usuario, ArrayList<Mascota> lista_mascotas) {
+    public Usuario(String nombre_usuario, String contrasenia_usuario, ArrayList<Mascota> lista_mascotas, String permiso) {
         this.nombre_usuario = nombre_usuario;
         this.contrasenia_usuario = contrasenia_usuario;
         this.lista_mascotas = lista_mascotas;
+        this.permiso = permiso;
     }
 
     public int getId() {
@@ -67,6 +70,14 @@ public class Usuario implements Serializable {
 
     public void setLista_mascotas(ArrayList<Mascota> lista_mascotas) {
         this.lista_mascotas = lista_mascotas;
+    }
+
+    public String getPermiso() {
+        return permiso;
+    }
+
+    public void setPermiso(String permiso) {
+        this.permiso = permiso;
     }
 
     @Override

@@ -94,15 +94,15 @@ public class PrimerPantallaAnimales extends javax.swing.JFrame {
 
     private void btn_ver_animalesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ver_animalesActionPerformed
         this.dispose();
-        VerAnimalesPantalla pp = new VerAnimalesPantalla(usuario);
-        pp.setVisible(rootPaneCheckingEnabled);
+        VerAnimalesPantalla pp = new VerAnimalesPantalla(usuario, null);
+        pp.setVisible(true);
         pp.setLocationRelativeTo(null);
     }//GEN-LAST:event_btn_ver_animalesActionPerformed
 
     private void btn_agregar_animales1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_agregar_animales1ActionPerformed
         this.dispose();
         PantallaPostLogin pp = new PantallaPostLogin(usuario);
-        pp.setVisible(rootPaneCheckingEnabled);
+        pp.setVisible(true);
         pp.setLocationRelativeTo(null);
     }//GEN-LAST:event_btn_agregar_animales1ActionPerformed
 

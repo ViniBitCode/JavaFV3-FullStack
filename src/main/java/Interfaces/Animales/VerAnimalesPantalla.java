@@ -7,6 +7,7 @@ package Interfaces.Animales;
 import ControladoraLogica.ControladoraLogica;
 import ControladoraLogica.Mascota;
 import ControladoraLogica.Usuario;
+import Interfaces.Roles.ListaUsuarios;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -17,14 +18,14 @@ public class VerAnimalesPantalla extends javax.swing.JFrame {
 
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(VerAnimalesPantalla.class.getName());
 
-    private final Usuario usuario;
+    private final Usuario usuario, admin;
     private DefaultTableModel tabla_animales;
     private ControladoraLogica control_bbdd = new ControladoraLogica();
     private boolean volver_pantalla = false;
 
-    public VerAnimalesPantalla(Usuario usuario) {
+    public VerAnimalesPantalla(Usuario usuario, Usuario admin) {
         this.usuario = usuario;
-
+        this.admin = admin;
         initComponents();
 
         configurarTablaAnimales();
@@ -236,10 +237,19 @@ public class VerAnimalesPantalla extends javax.swing.JFrame {
             mostrarTablaAnimales();
             volver_pantalla = false;
         } else {
-            this.dispose();
-            PrimerPantallaAnimales pp = new PrimerPantallaAnimales(usuario);
-            pp.setVisible(true);
-            pp.setLocationRelativeTo(null);
+
+            if (admin != null) {
+                this.dispose();
+                ListaUsuarios pp = new ListaUsuarios(admin);
+                pp.setVisible(true);
+                pp.setLocationRelativeTo(null);
+            } else {
+                this.dispose();
+                PrimerPantallaAnimales pp = new PrimerPantallaAnimales(usuario);
+                pp.setVisible(true);
+                pp.setLocationRelativeTo(null);
+            }
+
         }
 
 

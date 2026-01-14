@@ -24,6 +24,12 @@ public class ControladoraLogica {
 
     }
 
+    public ArrayList<Usuario> traerListaUsuario() {
+
+        return controladoraPersistencia.traerListaUsuario();
+
+    }
+
     public void eliminar_mascota(int id) {
 
         controladoraPersistencia.eliminarMascota(id);
@@ -53,4 +59,21 @@ public class ControladoraLogica {
 
     }
 
+    public void eliminar_usuario(int id_eliminar) {
+
+        controladoraPersistencia.eliminar_usuario(id_eliminar);
+
+    }
+
+    public Usuario buscar_usuario(int id_buscar) {
+
+        return controladoraPersistencia.buscar_usuario(id_buscar);
+
+    }
+
+    public void editar_usuario(Usuario usuario) {
+        
+        controladoraPersistencia.editar_usuario(usuario);
+    
+    }
 }
