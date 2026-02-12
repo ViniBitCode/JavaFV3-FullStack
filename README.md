@@ -14,7 +14,7 @@
   
 ### **Siguiente proyecto:**  
 ❇️ | El siguiente paso es la realización de algún proyecto con SpringBoot para seguir con el roadmap de Java. Idealmente, seguro sean 2 proyectos para empezar a tener un portafolio de proyectos un poco más grosos.  
-Repositorio de siguiente proyecto: [JavaFV4-](https://github.com/ViniBitCode/JavaFV3-FullStack)
+Repositorio de siguiente proyecto: [JavaFV4-Introduccion-SpringBoot](https://github.com/ViniBitCode/JavaFV4-Introduccion-SpringBoot)
 
 
 ## 📋 Ejecutar ejercicio de manera local
